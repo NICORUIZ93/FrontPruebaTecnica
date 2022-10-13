@@ -1,0 +1,23 @@
+<table class="table table-dark table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">descripcion</th>
+      <th scope="col">precio</th>
+      <th scope="col">Eliminar</th>
+      <th scope="col">Modificar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of producto">
+      <th scope="row">{{item.id}}</th>
+      <td>{{item.nombre}}</td>
+      <td>{{item.descripcion}}</td>
+      <td>${{item.precio}}</td>
+      <td><a (click)="eliminarProductos(item.id)" routerLink="/administracion"><img src="assets/eliminar.png" alt=""
+            srcset=""></a></td>
+      <td><a routerLink="/actualizar"><img src="assets/editar.png" alt=""
+            srcset=""></a></td>
+    </tr>
+</table>

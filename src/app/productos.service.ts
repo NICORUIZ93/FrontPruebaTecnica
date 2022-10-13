@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Producto } from './models/Producto';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -12,8 +13,13 @@ export class ProductosService {
   getProductos() {
     return this.Http.get<Producto[]>(environment.productos + 'getProductos');
   }
-  newProductos(producto: Producto) {
-    return this.Http.post(environment.productos + 'newProducto', { producto });
+  newProductos(producto: Producto): Observable<Producto> {
+    const headers = { 'content-type': 'application/json' };
+    return this.Http.post<any>(
+      environment.productos + 'newProducto',
+      producto,
+      { headers: headers }
+    );
   }
   eliminarProductos(id: number) {
     console.log(id);

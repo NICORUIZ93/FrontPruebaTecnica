@@ -1,7 +1,6 @@
 import { Producto } from '../models/Producto';
 import { ProductosService } from './../productos.service';
-import { Component, OnInit } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-administracion',
@@ -15,6 +14,9 @@ export class AdministracionComponent implements OnInit {
   ngOnInit(): void {
     this.getProductos();
   }
+  ngAfterContentInit() {
+    this.getProductos();
+  }
 
   getProductos() {
     this.productoService.getProductos().subscribe((data) => {
@@ -22,12 +24,12 @@ export class AdministracionComponent implements OnInit {
     });
   }
   newProductos(producto: Producto) {
-    this.productoService.newProductos(producto);
+    this.productoService.newProductos(producto).subscribe();
   }
   eliminarProductos(id: number) {
     this.productoService.eliminarProductos(id).subscribe();
   }
   actualizarProductos(id: number, producto: Producto) {
-    this.productoService.actualizarProductos(id, producto);
+    this.productoService.actualizarProductos(id, producto).subscribe();
   }
 }
